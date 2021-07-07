@@ -1,4 +1,3 @@
-
 const Recipe = use('App/Models/Recipe');
 const Drive = use('Drive');
 const {
@@ -7,13 +6,14 @@ const {
 const Env = use('Env');
 
 const fetch = require('node-fetch');
+const RECIPES_URL = 'https://api.getferdi.com/v1/recipes';
 
 class RecipeController {
   // List official and custom recipes
   async list({
     response,
   }) {
-    const officialRecipes = JSON.parse(await (await fetch('https://api.getferdi.com/v1/recipes')).text());
+    const officialRecipes = JSON.parse(await (await fetch(RECIPES_URL)).text());
     const customRecipesArray = (await Recipe.all()).rows;
     const customRecipes = customRecipesArray.map(recipe => ({
       id: recipe.recipeId,
@@ -61,7 +61,7 @@ class RecipeController {
     } else {
       let remoteResults = [];
       if (Env.get('CONNECT_WITH_FRANZ') == 'true') { // eslint-disable-line eqeqeq
-        remoteResults = JSON.parse(await (await fetch(`https://api.getferdi.com/v1/recipes/search?needle=${encodeURIComponent(needle)}`)).text());
+        remoteResults = JSON.parse(await (await fetch(`${RECIPES_URL}/search?needle=${encodeURIComponent(needle)}`)).text());
       }
       const localResultsArray = (await Recipe.query().where('name', 'LIKE', `%${needle}%`).fetch()).toJSON();
       const localResults = localResultsArray.map(recipe => ({
@@ -107,7 +107,7 @@ class RecipeController {
     if (await Drive.exists(`${service}.tar.gz`)) {
       return response.send(await Drive.get(`${service}.tar.gz`));
     } if (Env.get('CONNECT_WITH_FRANZ') == 'true') { // eslint-disable-line eqeqeq
-      return response.redirect(`https://api.getferdi.com/v1/recipes/download/${service}`);
+      return response.redirect(`${RECIPES_URL}/download/${service}`);
     }
     return response.status(400).send({
       message: 'Recipe not found',
