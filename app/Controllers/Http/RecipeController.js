@@ -6,7 +6,7 @@ const {
 const Env = use('Env');
 
 const fetch = require('node-fetch');
-const RECIPES_URL='https://api.getferdi.com/v1/recipes';
+const RECIPES_URL = 'https://api.getferdi.com/v1/recipes';
 
 class RecipeController {
   // List official and custom recipes
