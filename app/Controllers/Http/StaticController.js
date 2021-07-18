@@ -9,14 +9,10 @@ class StaticController {
     response,
   }) {
     return response.send({
-      isSpellcheckerPremiumFeature: false,
       isServiceProxyEnabled: true,
-      isServiceProxyPremiumFeature: true,
-      isWorkspacePremiumFeature: false,
       isWorkspaceEnabled: true,
       isAnnouncementsEnabled: true,
       isSettingsWSEnabled: false,
-      isCommunityRecipesPremiumFeature: false,
       isMagicBarEnabled: true,
       isTodosEnabled: true,
       subscribeURL: "https://getferdi.com",
