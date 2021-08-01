@@ -5,6 +5,9 @@
 # ferdi-internal-server
 Internal Ferdi Server used for storing settings without logging into an external server.
 
+# 🪦🪦🪦 ARCHIVED 🪦🪦🪦
+This repository has been merged into the main `ferdi` repository and subsequently the standalone repo has been moved into archived mode. Please log any bugs, etc in the main repo.
+
 ## Differences to ferdi-server
 - Doesn't contain user management (only one user)
 - Doesn't require logging in
